@@ -1,18 +1,28 @@
 package papeleria.empleados;
+
 import papeleria.personas.Persona;
 
-public class empleado extends Persona {
-    
+public class Empleado extends Persona {
+
     private String puesto;
-    public empleado(String nombre, String puesto) {
+    private int codigo;
+
+    public Empleado(String nombre, int codigo,String puesto) {
         super(nombre);
         this.puesto = puesto;
+        this.codigo = codigo;
     }
 
-    public String getPuesto() { return puesto; }
+    public String getPuesto() {
+        return this.puesto;
+    }
+
+    public int getCodigo() {
+        return this.codigo;
+    }
 
     @Override
     public void mostrarInfo() {
-        System.out.println("Empleado: " + getNombre() + ", Puesto: " + puesto);
+        System.out.println("Empleado: " + getNombre() + ", Puesto: " + this.puesto);
     }
 }

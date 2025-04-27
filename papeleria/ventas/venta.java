@@ -1,14 +1,14 @@
 package papeleria.ventas;
 
-import papeleria.clientes.cliente;
-import papeleria.productos.producto;
+import papeleria.clientes.Cliente;
+import papeleria.productos.Producto;
 
-public class venta {
-    private cliente cliente;
-    private producto producto;
+public class Venta {
+    private Cliente cliente;
+    private Producto producto;
     private int cantidad;
 
-    public venta(cliente cliente, producto producto, int cantidad) {
+    public Venta(Cliente cliente, Producto producto, int cantidad) {
         this.cliente = cliente;
         this.producto = producto;
         this.cantidad = cantidad;

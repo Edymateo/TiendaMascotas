@@ -1,9 +1,10 @@
 package papeleria.clientes;
 import papeleria.personas.Persona;
 
-public class cliente extends Persona{
+public class Cliente extends Persona{
     private String telefono;
-    public cliente(String nombre, String telefono) {
+
+    public Cliente(String nombre, String telefono) {
         super(nombre);
         this.telefono = telefono;
     }

@@ -1,16 +1,41 @@
 package papeleria;
 
 import java.util.Scanner;
-import papeleria.clientes.cliente;
-import papeleria.productos.producto;
-import papeleria.ventas.venta;
-import papeleria.inventario.inventario;
+import papeleria.clientes.Cliente;
+import papeleria.productos.Producto;
+import papeleria.ventas.Venta;
+import papeleria.inventario.Inventario;
 
-public class main {
+public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        inventario inventario = new inventario();
+        Inventario nuevoinventario = new Inventario();
         boolean salir = false;
+        String[] nombresProductos = { "Cuaderno",
+                "Lapiz Negro",
+                "Lapiz Rojo",
+                "Esfero Azul",
+                "Esfero Negro",
+                "Esfero Rojo",
+                "Resma de Papel",
+                "Tijeras",
+                "Acetato",
+                "Borrador",
+                "Corrector",
+                "Regla",
+                "Compas",
+                "Escuadra",
+                "Cinta",
+                "Grapadora",
+                "Marcador Negro",
+                "Marcador Rojo",
+                "Marcador Azul",
+                "Cartulina" };
+
+        for (int i = 0; i < 20; i++) {
+            Producto nuevoProducto = new Producto(i, nombresProductos[i], (i + 1) * 50);
+            nuevoinventario.agregarProducto(nuevoProducto);
+        }
 
         while (!salir) {
             System.out.println("\nMenu de opciones:");
@@ -25,18 +50,18 @@ public class main {
 
             switch (opcion) {
                 case 1:
-                    inventario.mostrarInventario();
+                    System.out.print("\n\n\n\n\n------- Mostrando inventario -------\n");
+                    nuevoinventario.mostrarInventario();
                     break;
                 case 2:
                     System.out.print("Ingrese el ID del producto: ");
                     int id = scanner.nextInt();
-                    scanner.nextLine();
                     System.out.print("Ingrese el nombre del producto: ");
                     String nombre = scanner.nextLine();
                     System.out.print("Ingrese el precio del producto: ");
-                    double precio = scanner.nextDouble();
-                    producto producto = new producto(id, nombre, precio);
-                    inventario.agregarProducto(producto);
+                    int precio = scanner.nextInt();
+                    Producto producto = new Producto(id, nombre, precio);
+                    nuevoinventario.agregarProducto(producto);
                     System.out.println("Producto agregado al inventario.");
                     break;
                 case 3:
@@ -44,12 +69,12 @@ public class main {
                     String nombreCliente = scanner.nextLine();
                     System.out.print("Ingrese el telefono del cliente: ");
                     String telefono = scanner.nextLine();
-                    cliente cliente = new cliente(nombreCliente, telefono);
+                    Cliente cliente = new Cliente(nombreCliente, telefono);
                     System.out.print("Ingrese el nombre del producto vendido: ");
                     String nombreProducto = scanner.nextLine();
                     System.out.print("Ingrese la cantidad: ");
                     int cantidad = scanner.nextInt();
-                    venta venta = new venta(cliente, new producto(0, nombreProducto, 0), cantidad);
+                    Venta venta = new Venta(cliente, new Producto(0, nombreProducto, 0), cantidad);
                     venta.mostrarVenta();
                     break;
                 case 4:

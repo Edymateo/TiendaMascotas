@@ -1,20 +1,21 @@
 package papeleria.inventario;
+
 import java.util.ArrayList;
-import papeleria.productos.producto;
+import papeleria.productos.Producto;
 
-public class inventario {
-    private ArrayList<producto> productos;
+public class Inventario {
+    private ArrayList<Producto> productos;
 
-    public inventario() {
-        productos = new ArrayList<>();
+    public Inventario() {
+        this.productos = new ArrayList<>();
     }
 
-    public void agregarProducto(producto producto) {
-        productos.add(producto);
+    public void agregarProducto(Producto producto) {
+        this.productos.add(producto);
     }
 
     public void mostrarInventario() {
-        for (producto p : productos) {
+        for (Producto p : productos) {
             p.mostrarInfo();
         }
     }

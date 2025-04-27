@@ -1,12 +1,12 @@
 package papeleria.productos;
 import papeleria.interfaces.Mostrable;
 
-public class producto implements Mostrable {
+public class Producto implements Mostrable {
     private int id;
     private String nombre;
-    private double precio;
+    private int precio;
 
-    public producto(int id, String nombre, double precio) {
+    public Producto(int id, String nombre, int precio) {
         this.id = id;
         this.nombre = nombre;
         this.precio = precio;
@@ -14,7 +14,7 @@ public class producto implements Mostrable {
 
     public int getId() { return id; }
     public String getNombre() { return nombre; }
-    public double getPrecio() { return precio; }
+    public int getPrecio() { return precio; }
 
     @Override
     public void mostrarInfo() {
