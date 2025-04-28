@@ -19,4 +19,35 @@ public class Inventario {
             p.mostrarInfo();
         }
     }
+
+    public void modificarProducto(int id, int nuevoPrecio, double porcentaje, int stock) {
+        for (Producto p : this.productos) {
+            if (p.getId() == id) {
+                p.setPrecio(nuevoPrecio);
+                p.setPorcentajeGanacia(porcentaje);
+                p.setStock(stock);
+                break;
+            }
+        }
+    }
+
+    public double mostrarganancia(int productoId) {
+        for (Producto p : this.productos) {
+            if (p.getId() == productoId) {
+                return (p.getPrecio() * p.getPorcentajeGanacia());
+            }
+        }
+        return 0.0;
+    }
+
+    public Producto buscarProducto(int productoId) {
+        Producto productoEncontrado = null;
+        for (Producto p : this.productos) {
+            if (p.getId() == productoId) {
+                productoEncontrado = p;
+            }
+        }
+        return productoEncontrado;
+    }
+
 }
