@@ -1,16 +1,14 @@
-package nuevaPapeleria2.inventario;
+package inventario;
 
 import java.util.ArrayList;
-
-import nuevaPapeleria2.itemInvetario.itemInventario;
-import papeleria.productos.Producto;
+import productos.Producto;
 
 public class Inventario {
-    private List<ItemInventario> items;
+    private List<itemInventario> items;
 
-    //contructores
-    public void ItemInventario() {
-        
+    // contructores
+    public void ItemInventario(List<ItemInventario> items) {
+        items=items;
     }
 
     public void modificarProducto(int id, int nuevoPrecio, double porcentaje, int stock) {
@@ -25,15 +23,16 @@ public class Inventario {
     }
 
     public void registrarEntrar(ItemInventario itemNuevo) {
-        ItemInventario itemExistente=buscar (itemNuevo.getProducto());
-        if (itemExistente==null){
+        ItemInventario itemExistente = buscar(itemNuevo.getProducto());
+        if (itemExistente == null) {
             items.add(itemNuevo);
-        }else {
-            //Actualiza el item existente con los datos del nuevo
-            //recalcular 
+        } else {
+            // Actualiza el item existente con los datos del nuevo
+            // recalcular
             registrarEntrada(itemExistente, itemNuevo);
         }
     }
+
     public static void registrarSalida(Producto p, int cantidad) {
         ItemInventario itemExistente= buscar (p);
         if (itemExistente !=null) {
@@ -41,8 +40,7 @@ public class Inventario {
         }
         
     }
-        return 0.0;
-    }//
+
 
     public Producto buscarProducto(int productoId) {
         Producto productoEncontrado = null;

@@ -1,4 +1,4 @@
-package papeleria.interfaces;
+package interfaces;
 
 public interface Mostrable {
     void mostrarInfo();

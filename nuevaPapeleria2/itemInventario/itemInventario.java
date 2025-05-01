@@ -1,9 +1,9 @@
-package nuevaPapeleria2.itemInvetario;
+package itemInventario;
 
 import java.time.LocalDate;
 
 import nuevaPapeleria2.productos.Producto;
-import papeleria.personas.Persona;
+import nuevaPapeleria2.personas.Persona;
 
 public class itemInventario {
 
@@ -22,7 +22,6 @@ public class itemInventario {
 
 
     public void setMargenGanacia(float mg){
-
         margenGanancia=mg;
         precioVenta=precioCosto/(1 - mg);
         valorGananacia=precioVenta-precioCosto;

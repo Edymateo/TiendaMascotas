@@ -1,6 +1,6 @@
-package papeleria.empleados;
+package nuevaPapeleria2.empleados;
 
-import papeleria.personas.Persona;
+import personas.Persona;
 
 public class Empleado extends Persona {
 

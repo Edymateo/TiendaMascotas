@@ -1,7 +1,7 @@
-package papeleria.Abastecimiento;
+package Abastecimiento;
 
-import papeleria.clientes.Cliente;
-import papeleria.productos.Producto;
+import clientes.Cliente;
+import productos.Producto;
 
 public class Abastecimiento {
     private Cliente cliente;
@@ -14,7 +14,5 @@ public class Abastecimiento {
         this.cantidad = cantidad;
     }
 
-    public void mostrarAbastecimiento() {
-        System.out.println("Cliente: " + cliente.getNombre() + ", Producto: " + producto.getNombre() + ", Cantidad: " + cantidad);
-    }
+
 }

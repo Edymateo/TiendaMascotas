@@ -1,5 +1,5 @@
-package papeleria.clientes;
-import papeleria.personas.Persona;
+package clientes;
+import personas.Persona;
 
 public class Cliente extends Persona{
     private String telefono;

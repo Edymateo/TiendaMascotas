@@ -1,15 +1,23 @@
-package papeleria;
+package nuevaPapeleria2;
 
 import java.util.Scanner;
-import papeleria.clientes.Cliente;
-import papeleria.productos.Producto;
-import papeleria.ventas.Venta;
-import papeleria.Abastecimiento.Abastecimiento;
-import papeleria.inventario.Inventario;
+import nuevaPapeleria2.clientes.Cliente;
+import nuevaPapeleria2.productos.Producto;
+import nuevaPapeleria2.ventas.Ventas;
+import nuevaPapeleria2.Abastecimiento.Abastecimiento;
+import nuevaPapeleria2.inventario.Inventario;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        Inventario nuevoinventario = new Inventario();
+            
+System.out.println("gholas");
+
+
+
+
+        /* Scanner scanner = new Scanner(System.in);
         Inventario nuevoinventario = new Inventario();
         boolean salir = false;
         double ganaciaPorProducto = 0.10;
@@ -127,6 +135,6 @@ public class Main {
             }
         }
         scanner.close();
-        System.out.println("Programa finalizado.");
+        System.out.println("Programa finalizado."); */
     }
 }

@@ -1,4 +1,4 @@
-package papeleria.personas;
+package nuevaPapeleria2.personas;
 
 public abstract class Persona {
     private String nombre;
