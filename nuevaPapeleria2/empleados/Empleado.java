@@ -1,4 +1,4 @@
-package nuevaPapeleria2.empleados;
+package empleados;
 
 import personas.Persona;
 

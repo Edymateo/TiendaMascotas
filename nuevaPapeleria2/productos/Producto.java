@@ -11,12 +11,30 @@ public class Producto {
         this.descripcion = descripcion;
     }
 
-    public int getId() { return id; }
-    public String getNombre() { return nombre; }
-    public String getDescripcion() { return descripcion; }
-    public void setDescripcion(String descripcion) { this.descripcion=descripcion; }
-    public void setId(int id) { this.id=id; }
-    public void setNombre(String nombre) { this.nombre=nombre; }
+    //getters and setters
+    public int getId() {
+        return this.id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return this.nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getDescripcion() {
+        return this.descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
 
 
 }

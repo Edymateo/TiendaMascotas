@@ -1,5 +1,9 @@
+package PersistenciaInventario;
 import java.io.*;
 import java.util.*;
+
+import itemInventario.ItemInventario;
+import productos.Producto;
 
 public class GestorInventario {
     public static void main(String[] args) {

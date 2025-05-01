@@ -1,6 +1,6 @@
-package nuevaPapeleria2.personas;
+package personas;
 
-public abstract class Persona {
+public class Persona {
     private String nombre;
 
     public Persona(String nombre) {
@@ -8,5 +8,4 @@ public abstract class Persona {
     }
 
     public String getNombre() { return this.nombre; }
-    public abstract void mostrarInfo();
 }

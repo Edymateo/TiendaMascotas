@@ -1,55 +1,57 @@
 package inventario;
 
-import java.util.ArrayList;
+import java.util.List;
+
+import itemInventario.ItemInventario;
 import productos.Producto;
 
 public class Inventario {
-    private List<itemInventario> items;
+    private List<ItemInventario> items;
 
     // contructores
-    public void ItemInventario(List<ItemInventario> items) {
-        items=items;
+
+    public Inventario(List<ItemInventario> items) {
+        this.items = items;
     }
 
-    public void modificarProducto(int id, int nuevoPrecio, double porcentaje, int stock) {
-        for (Producto p : this.productos) {
-            if (p.getId() == id) {
-                p.setPrecio(nuevoPrecio);
-                p.setPorcentajeGanacia(porcentaje);
-                p.setStock(stock);
-                break;
-            }
-        }
-    }
-
-    public void registrarEntrar(ItemInventario itemNuevo) {
+    public void registrarEntrada(ItemInventario itemNuevo) {
         ItemInventario itemExistente = buscar(itemNuevo.getProducto());
         if (itemExistente == null) {
             items.add(itemNuevo);
         } else {
             // Actualiza el item existente con los datos del nuevo
             // recalcular
-            registrarEntrada(itemExistente, itemNuevo);
+            // registrarEntrada(itemExistente, itemNuevo);
+            System.out.println("hace otra cosa");
         }
     }
 
-    public static void registrarSalida(Producto p, int cantidad) {
-        ItemInventario itemExistente= buscar (p);
-        if (itemExistente !=null) {
+    public void registrarSalida(Producto p, int cantidad) {
+        ItemInventario itemExistente = buscar(p);
+        if (itemExistente != null) {
             itemExistente.retirar(cantidad);
         }
-        
+
     }
 
-
-    public Producto buscarProducto(int productoId) {
-        Producto productoEncontrado = null;
-        for (Producto p : this.productos) {
-            if (p.getId() == productoId) {
-                productoEncontrado = p;
+    public ItemInventario buscar(Producto productoEntrante) {
+        ItemInventario itemInventarioEncontrado = null;
+        for (ItemInventario itemEvaluado : items) {
+            if (itemEvaluado.getProducto().getId() == productoEntrante.getId()) {
+                itemInventarioEncontrado = itemEvaluado;
+                break;
             }
         }
-        return productoEncontrado;
+        return itemInventarioEncontrado;
+
+    }
+
+    public List<ItemInventario> getItems() {
+        return this.items;
+    }
+
+    public void setItems(List<ItemInventario> items) {
+        this.items = items;
     }
 
 }
