@@ -1,16 +1,15 @@
 package ventas;
 
-import java.time.LocalDate;
 import java.util.List;
+import venta.Venta;
 
 public class Ventas {
-    List<Ventas> ventas;
-
     
-    public List<Ventas> getVentas(LocalDate desde, LocalDate hasta){
-        List<Ventas> ventas = null;
-        return ventas;
-    //otros metodos
+    List<Venta> ventas;
+
+
+    public Ventas(List<Venta> ventas) {
+        this.ventas = ventas;
     }
 
 }

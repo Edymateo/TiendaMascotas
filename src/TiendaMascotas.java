@@ -1,7 +1,7 @@
 package Tienda;
 import productos.Producto;
+import venta.Venta;
 import clientes.Cliente;
-import ventas.Venta;
 
 public class TiendaMascotas {
     public static void main(String[] args) {
