@@ -2,7 +2,6 @@ package InfoConsola;
 
 import java.io.PrintWriter;
 import java.util.Collection;
-
 import inventario.Inventario;
 import ventas.Ventas;
 import venta.Venta;
@@ -21,6 +20,7 @@ public class InfoConsola {
     }*/
 
     public static void mostraInfoInvetario(Inventario inventario){
+        System.out.print("\n\n\n\n\n------- Mostrando inventario -------\n");
        for (int i = 0; i < inventario.getItems().size() ; i++) {
         System.out.println("Nombre: "+inventario.getItems().get(i).getProducto().getNombre()
         + "\tCantidad: "+ inventario.getItems().get(i).getCantidadActual()

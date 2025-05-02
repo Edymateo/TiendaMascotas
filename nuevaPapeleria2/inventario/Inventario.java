@@ -1,9 +1,12 @@
 package inventario;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import itemInventario.ItemInventario;
 import productos.Producto;
+import venta.Venta;
+import ventas.Ventas;
 
 public class Inventario {
     private List<ItemInventario> items;
@@ -26,12 +29,13 @@ public class Inventario {
         }
     }
 
-    public void registrarSalida(Producto p, int cantidad) {
+    public void registrarSalida(Producto p, int cantidad,Ventas ventas) {
         ItemInventario itemExistente = buscar(p);
         if (itemExistente != null) {
             itemExistente.retirar(cantidad);
+            Venta nuevaVenta = new Venta(LocalDate.now(), p, cantidad,(itemExistente.getPrecioVenta()*cantidad));
+            ventas.agregarVenta(nuevaVenta);  
         }
-
     }
 
     public ItemInventario buscar(Producto productoEntrante) {
