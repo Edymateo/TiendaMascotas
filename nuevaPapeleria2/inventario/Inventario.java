@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import itemInventario.ItemInventario;
+import personas.Persona;
 import productos.Producto;
 import venta.Venta;
 import ventas.Ventas;
@@ -17,11 +18,15 @@ public class Inventario {
         this.items = items;
     }
 
-    public void registrarEntrada(ItemInventario itemNuevo) {
+    public void registrarEntrada(ItemInventario itemNuevo, Persona persona) {
         ItemInventario itemExistente = buscar(itemNuevo.getProducto());
         if (itemExistente == null) {
             items.add(itemNuevo);
         } else {
+            ItemInventario itemPromedio = new ItemInventario(persona, itemExistente.getUltimaEntrada(), itemExistente.getUltimaSalida(), itemExistente.getProducto(), (itemExistente.getPrecioCosto()+itemNuevo.getPrecioCosto())/2, (itemExistente.getMargenGanancia()+itemNuevo.getMargenGanancia()/2), (itemExistente.getPrecioVenta()+itemNuevo.getPrecioVenta()/2), (itemExistente.getValorGananacia()+itemNuevo.getValorGananacia()/2),itemExistente.getCantidadActual()+itemNuevo.getCantidadActual());
+            items.remove(itemExistente);
+            items.add(itemPromedio);
+            
             // Actualiza el item existente con los datos del nuevo
             // recalcular
             // registrarEntrada(itemExistente, itemNuevo);

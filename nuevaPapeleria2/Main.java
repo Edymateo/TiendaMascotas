@@ -44,33 +44,41 @@ public class Main {
                System.out.print("Ingrese el ID del producto: ");
                int id = scanner.nextInt();
                scanner.nextLine();
-               System.out.print("Ingrese el nombre del producto: ");
-               String nombre = scanner.nextLine();
-               System.out.print("Ingrese el precio del producto: ");
-               int precio = scanner.nextInt();
-               System.out.print("Ingrese el procentaje de ganancia del producto: ");
-               double porcentaje = scanner.nextDouble();
-               System.out.print("Ingrese el stock del producto: ");
-               int stock = scanner.nextInt();
-               // Producto producto = new Producto(id, nombre, precio, porcentaje, stock);
-               // nuevoinventario.agregarProducto(producto);
+               System.out.print("Ingrese el precio costo del producto: ");
+               double precioCosto = scanner.nextDouble();
+               System.out.print("Ingrese el margen de ganancia del producto: ");
+               float margenGanancia = scanner.nextInt();
+               System.out.print("Ingrese el precio venta del producto: ");
+               double precioVenta = scanner.nextDouble();
+               System.out.print("Ingrese el valor de la ganancia producto: ");
+               double valorGananacia = scanner.nextInt();
+               System.out.print("Ingrese la cantidad actual producto: ");
+               int cantidadActual = scanner.nextInt();
+                //Producto producto = new Producto(id, nombre, precio, porcentaje, stock);
+                //nuevoinventario.agregarProducto(producto);
                System.out.println("Producto agregado al inventario.");
+               Producto productoEncontrado = null;
+               for (Producto producto : itemsProductos) {
+                  if (producto.getId()==id) {
+                     productoEncontrado = producto;
+                  }
+               }
+               ItemInventario nuevoItems = new ItemInventario(jhanYuler, null, null, productoEncontrado, precioCosto, margenGanancia, precioVenta, valorGananacia, cantidadActual);
+               nuevoinventario.registrarEntrada(nuevoItems, jhanYuler);
                break;
             case 3:
-               System.out.print("Ingrese el ID del producto: ");
-               int idBuscar = scanner.nextInt();
-               System.out.print("Ingrese la cantidad del producto retirado: ");
-               int cantidadRetirada = scanner.nextInt();
-               int idVendido = scanner.nextInt();
-               System.out.print("Ingrese la cantidad: ");
-               int cantidad = scanner.nextInt();
-               
-                /*  Producto productoEncontrado =nuevoinventario.buscarProducto(idVendido);
-                 Venta venta = new Venta(cliente, productoEncontrado, cantidad);
-                 venta.mostrarVenta();
-                 nuevoinventario.modificarProducto(productoEncontrado.getId(),
-                 productoEncontrado.getPrecio(), productoEncontrado.getPorcentajeGanacia(),
-                 productoEncontrado.getStock()+cantidad);*/
+            System.out.print("Ingrese el ID del producto: ");
+            int idBuscar = scanner.nextInt();
+            System.out.print("Ingrese la cantidad del producto retirado: ");
+            int cantidadRetirada = scanner.nextInt();
+            System.out.print("Ingrese la cantidad: ");
+            int cantidad = scanner.nextInt();
+               /*  Producto productoEncontrado =nuevoinventario.buscarProducto(idVendido);
+                Venta venta = new Venta(cliente, productoEncontrado, cantidad);
+                venta.mostrarVenta();
+                nuevoinventario.modificarProducto(productoEncontrado.getId(),
+                productoEncontrado.getPrecio(), productoEncontrado.getPorcentajeGanacia(),
+                productoEncontrado.getStock()+cantidad);*/
                 
                 nuevoinventario.registrarSalida();
                break;
