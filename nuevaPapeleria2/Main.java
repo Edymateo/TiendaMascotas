@@ -52,8 +52,8 @@ public class Main {
             itemsInventario.add(nuevoItemInventario);
         }
 
-        Inventario nuevoinventario = new Inventario(itemsInventario);
-
+      Inventario nuevoinventario = new Inventario(itemsInventario);
+      
         boolean salir = false;
         while (!salir) {
              System.out.println("\nMenu de opciones:");
@@ -65,39 +65,49 @@ public class Main {
              System.out.println("6. Salir");
              System.out.print("Seleccione una opcion: ");
              
-             int opcion = scanner.nextInt();
-             scanner.nextLine();
-             
-             switch (opcion) {
-             case 1:
-                System.out.print("\n\n\n\n\n------- Mostrando inventario -------\n");
-                InfoConsola.mostraInfoInvetario(nuevoinventario);
-                break;
-             case 2:
-                System.out.print("Ingrese el ID del producto: ");
-                int id = scanner.nextInt();
-                scanner.nextLine();
-                System.out.print("Ingrese el nombre del producto: ");
-                String nombre = scanner.nextLine();
-                System.out.print("Ingrese el precio del producto: ");
-                int precio = scanner.nextInt();
-                System.out.print("Ingrese el procentaje de ganancia del producto: ");
-                double porcentaje = scanner.nextDouble();
-                System.out.print("Ingrese el stock del producto: ");
-                int stock = scanner.nextInt();
+            int opcion = scanner.nextInt();
+            scanner.nextLine();
+            
+            switch (opcion) {
+               case 1:
+               System.out.print("\n\n\n\n\n------- Mostrando inventario -------\n");
+               InfoConsola.mostraInfoInvetario(nuevoinventario);
+               break;
+            case 2:
+               System.out.print("Ingrese el ID del producto: ");
+               int id = scanner.nextInt();
+               scanner.nextLine();
+               System.out.print("Ingrese el precio costo del producto: ");
+               double precioCosto = scanner.nextDouble();
+               System.out.print("Ingrese el margen de ganancia del producto: ");
+               float margenGanancia = scanner.nextInt();
+               System.out.print("Ingrese el precio venta del producto: ");
+               double precioVenta = scanner.nextDouble();
+               System.out.print("Ingrese el valor de la ganancia producto: ");
+               double valorGananacia = scanner.nextInt();
+               System.out.print("Ingrese la cantidad actual producto: ");
+               int cantidadActual = scanner.nextInt();
                 //Producto producto = new Producto(id, nombre, precio, porcentaje, stock);
                 //nuevoinventario.agregarProducto(producto);
-                System.out.println("Producto agregado al inventario.");
-                break;
-             case 3:
-                System.out.print("Ingrese el nombre del cliente: ");
-                String nombreCliente = scanner.nextLine();
-                System.out.print("Ingrese el telefono del cliente: ");
-                String telefono = scanner.nextLine();
-                Cliente cliente = new Cliente(nombreCliente, telefono);
-                System.out.print("Ingrese el Id del producto reabastecido: ");
-                int idVendido = scanner.nextInt();
-                System.out.print("Ingrese la cantidad: ");
+               System.out.println("Producto agregado al inventario.");
+               Producto productoEncontrado = null;
+               for (Producto producto : itemsProductos) {
+                  if (producto.getId()==id) {
+                     productoEncontrado = producto;
+                  }
+               }
+               ItemInventario nuevoItems = new ItemInventario(jhanYuler, null, null, productoEncontrado, precioCosto, margenGanancia, precioVenta, valorGananacia, cantidadActual);
+               nuevoinventario.registrarEntrada(nuevoItems, jhanYuler);
+               break;
+            case 3:
+               System.out.print("Ingrese el nombre del cliente: ");
+               String nombreCliente = scanner.nextLine();
+               System.out.print("Ingrese el telefono del cliente: ");
+               String telefono = scanner.nextLine();
+               Cliente cliente = new Cliente(nombreCliente, telefono);
+               System.out.print("Ingrese el Id del producto reabastecido: ");
+               int idVendido = scanner.nextInt();
+               System.out.print("Ingrese la cantidad: ");
                 int cantidad = scanner.nextInt();
                /*  Producto productoEncontrado =nuevoinventario.buscarProducto(idVendido);
                 Venta venta = new Venta(cliente, productoEncontrado, cantidad);
