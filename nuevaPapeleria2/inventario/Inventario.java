@@ -34,13 +34,11 @@ public class Inventario {
         }
     }
 
-    public void registrarSalida(Producto p, int cantidad,Ventas ventas) {
+    public Venta registrarSalida(Producto p, int cantidad) {
         ItemInventario itemExistente = buscar(p);
-        if (itemExistente != null) {
-            itemExistente.retirar(cantidad);
-            Venta nuevaVenta = new Venta(LocalDate.now(), p, cantidad,(itemExistente.getPrecioVenta()*cantidad));
-            ventas.agregarVenta(nuevaVenta);  
-        }
+        itemExistente.retirar(cantidad);
+        Venta nuevaVenta = new Venta(LocalDate.now(), p, cantidad,(itemExistente.getPrecioVenta()*cantidad));
+        return nuevaVenta;
     }
 
     public ItemInventario buscar(Producto productoEntrante) {

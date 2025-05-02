@@ -73,14 +73,15 @@ public class Main {
             int cantidadRetirada = scanner.nextInt();
             System.out.print("Ingrese la cantidad: ");
             int cantidad = scanner.nextInt();
-               /*  Producto productoEncontrado =nuevoinventario.buscarProducto(idVendido);
-                Venta venta = new Venta(cliente, productoEncontrado, cantidad);
-                venta.mostrarVenta();
-                nuevoinventario.modificarProducto(productoEncontrado.getId(),
-                productoEncontrado.getPrecio(), productoEncontrado.getPorcentajeGanacia(),
-                productoEncontrado.getStock()+cantidad);*/
+            Producto productoEncontradoSalidaEntrada= null;
+               for (Producto p : itemsProductos) {
+                  if (p.getId()==idBuscar) {
+                     
+                  }
+               }
                 
-                nuevoinventario.registrarSalida();
+               ventas.agregarVenta(nuevoinventario.registrarSalida(productoEncontradoSalidaEntrada,cantidadRetirada));
+               System.out.print("Venta agregada correctamente");
                break;
             case 4:
                System.out.print("Ingrese el nombre del cliente: ");
