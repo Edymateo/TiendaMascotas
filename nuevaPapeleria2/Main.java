@@ -1,6 +1,7 @@
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 import clientes.Cliente;
@@ -23,7 +24,7 @@ public class Main {
       Ventas ventas = new Ventas(listaVentaInicial);
 
       boolean salir = false;
-      while (!salir) {
+      while (!salir) { 
          System.out.println("\nMenu de opciones:");
          System.out.println("1. Ver inventario");
          System.out.println("2. Agregar producto al inventario");
@@ -32,17 +33,25 @@ public class Main {
          System.out.println("5. Modificar productos");
          System.out.println("6. Salir");
          System.out.print("Seleccione una opcion: ");
-
-         int opcion = scanner.nextInt();
-         scanner.nextLine();
-
+         int opcion=0;
+         boolean entrada = false;
+         while (!entrada){
+         try {
+            System.out.print("Ingrese un número: ");
+            opcion = Integer.parseInt(scanner.nextLine());
+            entrada = true;
+         } catch (NumberFormatException e) {
+            System.out.println("Debes poner un numero");
+         }
+      }
          switch (opcion) {
             case 1:
                InfoConsola.mostraInfoInvetario(nuevoinventario);
                break;
             case 2:
+            try {
                System.out.print("Ingrese el ID del producto: ");
-               int id = scanner.nextInt();
+               int id = scanner.nextInt()-1;
                scanner.nextLine();
                System.out.print("Ingrese el precio costo del producto: ");
                double precioCosto = scanner.nextDouble();
@@ -61,12 +70,24 @@ public class Main {
                for (Producto producto : itemsProductos) {
                   if (producto.getId()==id) {
                      productoEncontrado = producto;
+                     break;
                   }
+               }
+               if (productoEncontrado.equals(null)) {
+                  System.out.println("El ID del producto no fue encontrado");
                }
                ItemInventario nuevoItems = new ItemInventario(jhanYuler, null, null, productoEncontrado, precioCosto, margenGanancia, precioVenta, valorGananacia, cantidadActual);
                nuevoinventario.registrarEntrada(nuevoItems, jhanYuler);
-               break;
+               }
+               catch( InputMismatchException e){
+                  System.out.println("Error: Debes ingresar un valor numérico válido.");
+                  scanner.nextLine();
+               } catch (Exception e){
+                  System.out.println("Ocurrió un error inesperado: " + e.getMessage());
+               }
+         
             case 3:
+            try{
             System.out.print("Ingrese el ID del producto: ");
             int idBuscar = scanner.nextInt();
             System.out.print("Ingrese la cantidad del producto retirado: ");
@@ -75,12 +96,24 @@ public class Main {
                for (Producto p : itemsProductos) {
                   if (p.getId()==idBuscar) {
                      productoEncontradoRegistroEntrada=p;
+                     break;
                   }
                }
+               if (productoEncontradoRegistroEntrada.equals(null)) {
+                  System.out.println("El ID del producto no fue encontrado");
+               }  
                ventas.agregarVenta(nuevoinventario.registrarSalida(productoEncontradoRegistroEntrada,cantidadRetirada));
                System.out.print("Venta agregada correctamente");
-               break;
+            }
+
+                  catch( InputMismatchException e){
+                     System.out.println("Error: Debes ingresar un valor numérico válido.");
+                     scanner.nextLine();
+                  } catch (Exception e){
+                     System.out.println("Ocurrió un error inesperado: " + e.getMessage());
+                  }
             case 4:
+            try{
                System.out.print("Ingrese el nombre del cliente: ");
                String nombreClienteEntrada = scanner.nextLine();
                System.out.print("Ingrese el telefono del cliente: ");
@@ -90,20 +123,17 @@ public class Main {
                int idVendidoEntrada = scanner.nextInt();
                System.out.print("Ingrese la cantidad: ");
                int cantidadEntrada = scanner.nextInt();
-               /*
-                * Producto productoEncontradoEntrada
-                * =nuevoinventario.buscarProducto(idVendidoEntrada);
-                * Abastecimiento abastecimiento = new Abastecimiento(clienteEntrada,
-                * productoEncontradoEntrada, cantidadEntrada);
-                * abastecimiento.mostrarAbastecimiento();
-                * nuevoinventario.modificarProducto(productoEncontradoEntrada.getId(),
-                * productoEncontradoEntrada.getPrecio(),
-                * productoEncontradoEntrada.getPorcentajeGanacia(),
-                * productoEncontradoEntrada.getStock()-cantidadEntrada);
-                */
-
                break;
+            }
+               
+               catch( InputMismatchException e){
+                  System.out.println("Error: Debes ingresar un valor numérico válido.");
+                  scanner.nextLine();
+               } catch (Exception e){
+                  System.out.println("Ocurrió un error inesperado: " + e.getMessage());
+               }
             case 5:
+            try{
                System.out.print("Ingrese el ID del producto: ");
                int idModificar = scanner.nextInt();
                System.out.print("Ingrese el precio costo: ");
@@ -120,8 +150,12 @@ public class Main {
                for (Producto producto : itemsProductos) {
                   if (producto.getId()==idModificar) {
                      productoModificado = producto;
+                     break;
                   }
                }
+               if (productoModificado.equals(null)) {
+                  System.out.println("El ID del producto no fue encontrado");
+               }  
                ItemInventario itemInventarioModificar = nuevoinventario.buscar(productoModificado);
                itemInventarioModificar.setPrecioCosto(precioCostoModificar);
                itemInventarioModificar.setMargenGanacia(margenGananciaModificar);
@@ -129,6 +163,7 @@ public class Main {
                itemInventarioModificar.setValorGananacia(valorGananaciaModificar);
                itemInventarioModificar.setCantidadActual(cantidadActualModificar);
                System.out.println("producto modificado con exito");
+            }
 
                /*
                 * nuevoinventario.modificarProducto(idModificar, precioNuevo,
@@ -137,7 +172,12 @@ public class Main {
                 * System.out.println("La nueva ganancia para este producto es de "
                 * + nuevoinventario.mostrarganancia(idModificar));
                 */
-               break;
+               catch( InputMismatchException e){
+                  System.out.println("Error: Debes ingresar un valor numérico válido.");
+                  scanner.nextLine();
+               } catch (Exception e){
+                  System.out.println("Ocurrió un error inesperado: " + e.getMessage());
+               }
             case 6:
                salir = true;
                break;
