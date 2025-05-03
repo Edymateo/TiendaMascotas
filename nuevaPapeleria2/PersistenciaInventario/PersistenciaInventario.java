@@ -1,11 +1,14 @@
+package PersistenciaInventario;
+
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDate;
+import java.util.*;
 
 import itemInventario.ItemInventario;
+import personas.Persona;
 import productos.Producto;
 
-public class PersistenciaInventario{
+public class PersistenciaInventario {
     private String rutaArchivo;
 
     public PersistenciaInventario(String rutaArchivo) {
@@ -13,7 +16,6 @@ public class PersistenciaInventario{
         crearArchivoSiNoExiste();
     }
 
-    // Crea el archivo si no existe
     public void crearArchivoSiNoExiste() {
         File archivo = new File(rutaArchivo);
         try {
@@ -26,27 +28,70 @@ public class PersistenciaInventario{
         }
     }
 
-    public List<ItemInventario> leerInventario() {
+    public List<ItemInventario> leerInventario(List<Producto> productosDisponibles, List<Persona> personasDisponibles) {
         List<ItemInventario> inventario = new ArrayList<>();
-
         try (BufferedReader reader = new BufferedReader(new FileReader(rutaArchivo))) {
             String linea;
             while ((linea = reader.readLine()) != null) {
-                String[] datos = linea.split("-/-");
-                if (datos.length == 4) {
-                    int id = Integer.parseInt(datos[0]);
-                    String nombre = datos[1];
-                    String descripcion = datos[2];
+                String[] datos = linea.split("\\|");
 
-                    ItemInventario itemInventario = new ItemInventario(id, nombre, descripcion);
-                    inventario.add(producto);
+                String nombrePersona = datos[0];
+                int idProducto = Integer.parseInt(datos[1]);
+
+                Persona proveedor = personasDisponibles.stream()
+                        .filter(p -> p.getNombre().equalsIgnoreCase(nombrePersona))
+                        .findFirst()
+                        .orElse(null);
+
+                if (proveedor == null) {
+                    System.out.println("Persona '" + nombrePersona + "' no encontrada. Se omite línea.");
+                    continue;
                 }
+
+                Producto producto = productosDisponibles.stream()
+                        .filter(p -> p.getId() == idProducto)
+                        .findFirst()
+                        .orElse(null);
+
+                if (producto == null) {
+                    System.out.println("Producto con ID " + idProducto + " no encontrado. Se omite línea.");
+                    continue;
+                }
+
+                LocalDate entrada = LocalDate.parse(datos[2]);
+                LocalDate salida = LocalDate.parse(datos[3]);
+                double precioCosto = Double.parseDouble(datos[4]);
+                float margen = Float.parseFloat(datos[5]);
+                double precioVenta = Double.parseDouble(datos[6]);
+                double ganancia = Double.parseDouble(datos[7]);
+                int cantidad = Integer.parseInt(datos[8]);
+
+                ItemInventario item = new ItemInventario(proveedor, entrada, salida, producto,
+                        precioCosto, margen, precioVenta, ganancia, cantidad);
+                inventario.add(item);
             }
         } catch (IOException e) {
-            System.out.println("Error al leer el archivo: " + e.getMessage());
+            System.out.println("Error al leer inventario: " + e.getMessage());
         }
+        return inventario;
+    }
 
-        return productos;
+    public void guardarItemInventario(ItemInventario item) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(rutaArchivo, true))) {
+            String linea = item.getProveedor().getNombre() + "|" +
+                    item.getProducto().getId() + "|" +
+                    item.getUltimaEntrada() + "|" +
+                    item.getUltimaSalida() + "|" +
+                    item.getPrecioCosto() + "|" +
+                    item.getMargenGanancia() + "|" +
+                    item.getPrecioVenta() + "|" +
+                    item.getValorGananacia() + "|" +
+                    item.getCantidadActual();
+            writer.write(linea);
+            writer.newLine();
+        } catch (IOException e) {
+            System.out.println("Error al guardar item: " + e.getMessage());
+        }
     }
 
 }

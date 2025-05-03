@@ -7,7 +7,6 @@ import itemInventario.ItemInventario;
 import personas.Persona;
 import productos.Producto;
 import venta.Venta;
-import ventas.Ventas;
 
 public class Inventario {
     private List<ItemInventario> items;
@@ -23,13 +22,11 @@ public class Inventario {
         if (itemExistente == null) {
             items.add(itemNuevo);
         } else {
-            ItemInventario itemPromedio = new ItemInventario(persona, itemExistente.getUltimaEntrada(), itemExistente.getUltimaSalida(), itemExistente.getProducto(), (itemExistente.getPrecioCosto()+itemNuevo.getPrecioCosto())/2, (itemExistente.getMargenGanancia()+itemNuevo.getMargenGanancia()/2), (itemExistente.getPrecioVenta()+itemNuevo.getPrecioVenta()/2), (itemExistente.getValorGananacia()+itemNuevo.getValorGananacia()/2),itemExistente.getCantidadActual()+itemNuevo.getCantidadActual());
-            items.remove(itemExistente);
-            items.add(itemPromedio);
-            
-            // Actualiza el item existente con los datos del nuevo
-            // recalcular
-            // registrarEntrada(itemExistente, itemNuevo);
+            itemExistente.setPrecioCosto((itemExistente.getPrecioCosto()+itemNuevo.getPrecioCosto())/2);
+            itemExistente.setMargenGanancia((itemExistente.getMargenGanancia()+itemNuevo.getMargenGanancia()/2));
+            itemExistente.setPrecioVenta((itemExistente.getPrecioVenta()+itemNuevo.getPrecioVenta()/2));
+            itemExistente.setValorGananacia((itemExistente.getValorGananacia()+itemNuevo.getValorGananacia()/2));
+            itemExistente.setCantidadActual(itemExistente.getCantidadActual()+itemNuevo.getCantidadActual());
             System.out.println("hace otra cosa");
         }
     }
@@ -50,7 +47,6 @@ public class Inventario {
             }
         }
         return itemInventarioEncontrado;
-
     }
 
     public List<ItemInventario> getItems() {

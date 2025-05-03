@@ -27,11 +27,10 @@ public class Main {
       while (!salir) { 
          System.out.println("\nMenu de opciones:");
          System.out.println("1. Ver inventario");
-         System.out.println("2. Agregar producto al inventario");
-         System.out.println("3. Registrar entrada productos");
-         System.out.println("4. Registrar salida productos");
-         System.out.println("5. Modificar productos");
-         System.out.println("6. Salir");
+         System.out.println("2. Registrar entrada productos");
+         System.out.println("3. Registrar salida productos");
+         System.out.println("4. Modificar productos");
+         System.out.println("5. Salir");
          System.out.print("Seleccione una opcion: ");
          int opcion=0;
          boolean entrada = false;
@@ -63,8 +62,6 @@ public class Main {
                double valorGananacia = scanner.nextInt();
                System.out.print("Ingrese la cantidad actual producto: ");
                int cantidadActual = scanner.nextInt();
-                //Producto producto = new Producto(id, nombre, precio, porcentaje, stock);
-                //nuevoinventario.agregarProducto(producto);
                System.out.println("Producto agregado al inventario.");
                Producto productoEncontrado = null;
                for (Producto producto : itemsProductos) {
@@ -114,26 +111,6 @@ public class Main {
                   }
             case 4:
             try{
-               System.out.print("Ingrese el nombre del cliente: ");
-               String nombreClienteEntrada = scanner.nextLine();
-               System.out.print("Ingrese el telefono del cliente: ");
-               String telefonoEntrada = scanner.nextLine();
-               Cliente clienteEntrada = new Cliente(nombreClienteEntrada, telefonoEntrada);
-               System.out.print("Ingrese el Id del producto vendido: ");
-               int idVendidoEntrada = scanner.nextInt();
-               System.out.print("Ingrese la cantidad: ");
-               int cantidadEntrada = scanner.nextInt();
-               break;
-            }
-               
-               catch( InputMismatchException e){
-                  System.out.println("Error: Debes ingresar un valor numérico válido.");
-                  scanner.nextLine();
-               } catch (Exception e){
-                  System.out.println("Ocurrió un error inesperado: " + e.getMessage());
-               }
-            case 5:
-            try{
                System.out.print("Ingrese el ID del producto: ");
                int idModificar = scanner.nextInt();
                System.out.print("Ingrese el precio costo: ");
@@ -164,21 +141,13 @@ public class Main {
                itemInventarioModificar.setCantidadActual(cantidadActualModificar);
                System.out.println("producto modificado con exito");
             }
-
-               /*
-                * nuevoinventario.modificarProducto(idModificar, precioNuevo,
-                * porcentajeNuevo,stockNuevo);
-                * System.out.println("Producto modificado con exito");
-                * System.out.println("La nueva ganancia para este producto es de "
-                * + nuevoinventario.mostrarganancia(idModificar));
-                */
                catch( InputMismatchException e){
                   System.out.println("Error: Debes ingresar un valor numérico válido.");
                   scanner.nextLine();
                } catch (Exception e){
                   System.out.println("Ocurrió un error inesperado: " + e.getMessage());
                }
-            case 6:
+            case 5:
                salir = true;
                break;
             default:
