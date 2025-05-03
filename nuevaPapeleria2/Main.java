@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
-import clientes.Cliente;
 import productos.Producto;
 import venta.Venta;
 import ventas.Ventas;
 import InfoConsola.InfoConsola;
+import PersistenciaInventario.PersistenciaInventario;
+import PersistenciaProductos.PersistenciaProductos;
 import inventario.Inventario;
 import itemInventario.ItemInventario;
 import personas.Persona;
@@ -16,9 +17,11 @@ import personas.Persona;
 public class Main {
    public static void main(String[] args) {
       Scanner scanner = new Scanner(System.in);
-      List<Producto> itemsProductos = crearProductos();
       Persona jhanYuler = new Persona("jhanYuler");
-      List<ItemInventario> itemsInventario = crearItemsInventario(jhanYuler, itemsProductos);
+      PersistenciaProductos persistenciaProductos = new PersistenciaProductos("inventario.txt");
+      List<Producto> itemsProductos = persistenciaProductos.leerProductos();
+      PersistenciaInventario persistenaciaInventario = new PersistenciaInventario("inventario.txt");
+      List<ItemInventario> itemsInventario = persistenaciaInventario.leerInventario(itemsProductos,jhanYuler);
       Inventario nuevoinventario = new Inventario(itemsInventario);
       List<Venta> listaVentaInicial = new ArrayList<>();
       Ventas ventas = new Ventas(listaVentaInicial);

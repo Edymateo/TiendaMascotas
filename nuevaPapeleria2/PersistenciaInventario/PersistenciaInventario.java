@@ -28,25 +28,14 @@ public class PersistenciaInventario {
         }
     }
 
-    public List<ItemInventario> leerInventario(List<Producto> productosDisponibles, List<Persona> personasDisponibles) {
+    public List<ItemInventario> leerInventario(List<Producto> productosDisponibles, Persona proveedor) {
         List<ItemInventario> inventario = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(rutaArchivo))) {
             String linea;
             while ((linea = reader.readLine()) != null) {
                 String[] datos = linea.split("\\|");
 
-                String nombrePersona = datos[0];
                 int idProducto = Integer.parseInt(datos[1]);
-
-                Persona proveedor = personasDisponibles.stream()
-                        .filter(p -> p.getNombre().equalsIgnoreCase(nombrePersona))
-                        .findFirst()
-                        .orElse(null);
-
-                if (proveedor == null) {
-                    System.out.println("Persona '" + nombrePersona + "' no encontrada. Se omite línea.");
-                    continue;
-                }
 
                 Producto producto = productosDisponibles.stream()
                         .filter(p -> p.getId() == idProducto)
