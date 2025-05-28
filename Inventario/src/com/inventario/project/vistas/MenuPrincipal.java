@@ -32,7 +32,6 @@ public class MenuPrincipal extends JFrame {
 	private Controlador controlador;
 
 	private JPanel contentPane;
-	private JTextField txtEsta;
 
 
 	/**
@@ -61,8 +60,8 @@ public class MenuPrincipal extends JFrame {
 		contentPane.add(panel1);
 		panel1.setLayout(null);
 
-		JLabel lblNewLabel_1 = new JLabel("INVENTARIO VARIEDADES RUIZ");
-		lblNewLabel_1.setBounds(62, 5, 300, 50);
+		JLabel lblNewLabel_1 = new JLabel("INVENTARIO PAPELERIA EL NEVADO");
+		lblNewLabel_1.setBounds(62, 51, 300, 50);
 		panel1.add(lblNewLabel_1);
 		lblNewLabel_1.setBackground(SystemColor.control);
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
@@ -71,14 +70,9 @@ public class MenuPrincipal extends JFrame {
 		lblNewLabel_1.setFont(new Font("Times New Roman", Font.BOLD, 16));
 		lblNewLabel_1.setForeground(Color.WHITE);
 		JButton btnNewButton = new JButton("Ver Panel de opciones");
-		btnNewButton.setBounds(105, 159, 200, 32);
+		btnNewButton.setBackground(SystemColor.textHighlight);
+		btnNewButton.setBounds(106, 125, 200, 32);
 		panel1.add(btnNewButton);
-		
-		txtEsta = new JTextField();
-		txtEsta.setText("Mediante esta aplicacion podras\r\n gestionar datos del inventario");
-		txtEsta.setBounds(48, 51, 325, 97);
-		panel1.add(txtEsta);
-		txtEsta.setColumns(10);
 		
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

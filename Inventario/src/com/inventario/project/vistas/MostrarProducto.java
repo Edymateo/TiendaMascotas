@@ -17,6 +17,7 @@ import com.inventario.project.controlador.Controlador;
 import com.inventario.project.controlador.modelo.Producto;
 import com.inventario.project.persitencia.PersistenciaInventario;
 import java.awt.Color;
+import java.awt.SystemColor;
 
 public class MostrarProducto extends JFrame {
     private static final long serialVersionUID = 1L;
@@ -36,53 +37,80 @@ public class MostrarProducto extends JFrame {
         contentPane.setLayout(null);
 
         JPanel panel = new JPanel();
+        panel.setBackground(Color.GRAY);
         panel.setBounds(0, 0, 528, 370);
         contentPane.add(panel);
         panel.setLayout(null);
 
         JLabel lblNewLabel = new JLabel("PRODUCTOS");
-        lblNewLabel.setBounds(191, 11, 136, 27);
+        lblNewLabel.setBounds(214, 10, 82, 42);
         panel.add(lblNewLabel);
 
-        String[] columnas = {"Código", "Nombre", "Descripcion","cantidad","precio"};
-        modeloTabla = new DefaultTableModel(columnas, 0);
-        tabla = new JTable(modeloTabla);
-
-        JScrollPane scrollPane = new JScrollPane(tabla);
-        scrollPane.setBounds(156, 41, 363, 257); 
-        panel.add(scrollPane);
-
         JButton btnNewButton = new JButton("ver");
+        btnNewButton.setBackground(SystemColor.textHighlight);
         btnNewButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                PersistenciaInventario persistenciaInventario = new PersistenciaInventario();
-                ArrayList<Producto> productos = persistenciaInventario.verInventario();
-
-                modeloTabla.setRowCount(0); 
-                for (Producto item : productos) {
-                    modeloTabla.addRow(new Object[]{
-                        item.getId(),
-                        item.getNombre(),
-                        item.getDescripcion(),
-                        item.getPrecio(),
-                        item.getCantidad(),
-                    });
+               controlador.mostrarVentanaVerInventario();
+               dispose();
                 }
-            }
+            
         });
-        btnNewButton.setBounds(10, 44, 89, 23);
+        
+        JButton btnRegistrarSalida = new JButton("Registrar Salida");
+        btnRegistrarSalida.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		controlador.mostrarVentanaRegistrarSalida();
+        		dispose();
+        	}
+        });
+        
+        JButton btnSalir = new JButton("Salir");
+        btnSalir.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		dispose();
+        	}
+        });
+        btnSalir.setBackground(SystemColor.textHighlight);
+        btnSalir.setBounds(174, 227, 136, 23);
+        panel.add(btnSalir);
+        btnRegistrarSalida.setBackground(SystemColor.textHighlight);
+        btnRegistrarSalida.setBounds(174, 161, 136, 23);
+        panel.add(btnRegistrarSalida);
+        
+        JButton btnModificarProducto = new JButton("Modificar Producto");
+        btnModificarProducto.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		controlador.mostrarVentanaModificarProducto();
+        		dispose();
+        	}
+        });
+        btnModificarProducto.setBackground(SystemColor.textHighlight);
+        btnModificarProducto.setBounds(174, 194, 136, 23);
+        panel.add(btnModificarProducto);
+        
+        JButton btnBuscarProducto = new JButton("Buscar Producto");
+        btnBuscarProducto.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		controlador.mostrarVentanaBuscarProducto();
+        		dispose();
+        	}
+        });
+        btnBuscarProducto.setBackground(SystemColor.textHighlight);
+        btnBuscarProducto.setBounds(174, 128, 136, 23);
+        panel.add(btnBuscarProducto);
+        btnNewButton.setBounds(174, 62, 136, 23);
         panel.add(btnNewButton);
         
         JButton btnNewButton_1 = new JButton("Guardar producto");
-        btnNewButton_1.setBackground(Color.YELLOW);
-        btnNewButton_1.setForeground(Color.BLUE);
+        btnNewButton_1.setBackground(SystemColor.textHighlight);
+        btnNewButton_1.setForeground(Color.BLACK);
         btnNewButton_1.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		controlador.mostrarVentanaRegistrarProducto();
         		dispose();
         	}
         });
-        btnNewButton_1.setBounds(10, 70, 136, 23);
+        btnNewButton_1.setBounds(174, 95, 136, 23);
         panel.add(btnNewButton_1);
     }
 

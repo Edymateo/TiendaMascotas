@@ -19,6 +19,7 @@ import com.inventario.project.controlador.Controlador;
 import com.inventario.project.controlador.modelo.Producto;
 import com.inventario.project.persitencia.PersistenciaInventario;
 import javax.swing.JTextField;
+import java.awt.SystemColor;
 
 public class RegistarProducto extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -75,25 +76,33 @@ public class RegistarProducto extends JFrame {
 		textField_precio.setColumns(10);
 
 		JButton btnNewButton_5 = new JButton("Registrar");
+		btnNewButton_5.setBackground(SystemColor.textHighlight);
 		btnNewButton_5.addActionListener(new ActionListener() {
 			private Component btnNewButton_5;
 
 			public void actionPerformed(ActionEvent e) {
-
-				PersistenciaInventario inventario = new PersistenciaInventario();
-				Producto producto = new Producto(Integer.parseInt(textFieldId.getText()), textField_Nombre.getText(),textField_descripcion.getText(),Integer.parseInt(textField_cantidad.getText()),Integer.parseInt(textField_precio.getText()));
-				boolean flag = inventario.agregarProducto(producto);
-				if(flag) { JOptionPane.showMessageDialog(this.btnNewButton_5, "Registrado correctamente");}
-				else {
-					JOptionPane.showMessageDialog(this.btnNewButton_5, "error al registrar");
+				try {
+					PersistenciaInventario inventario = new PersistenciaInventario();
+					Producto producto = new Producto(Integer.parseInt(textFieldId.getText()), textField_Nombre.getText(),textField_descripcion.getText(),Integer.parseInt(textField_cantidad.getText()),Integer.parseInt(textField_precio.getText()));
+					boolean flag = inventario.agregarProducto(producto);
+					if (flag) {
+						JOptionPane.showMessageDialog(this.btnNewButton_5, "Registrado correctamente");
+					} else {
+						JOptionPane.showMessageDialog(this.btnNewButton_5, "Error al registrar");
+					}
+				} catch (NumberFormatException ex) {
+					JOptionPane.showMessageDialog(this.btnNewButton_5, "Error: ID, Cantidad y Precio deben ser números válidos.");
+				} catch (Exception ex) {
+					JOptionPane.showMessageDialog(this.btnNewButton_5, "Ocurrió un error: " + ex.getMessage());
 				}
+
 
 			}
 		});
 		btnNewButton_5.setBounds(133, 274, 89, 23);
 		panel.add(btnNewButton_5);
 
-		JLabel lblNewLabel_1 = new JLabel("id");
+		JLabel lblNewLabel_1 = new JLabel("ID");
 		lblNewLabel_1.setBounds(75, 86, 46, 14);
 		panel.add(lblNewLabel_1);
 
@@ -102,7 +111,7 @@ public class RegistarProducto extends JFrame {
 		panel.add(lblNewLabel_2);
 
 		JLabel lblNewLabel_3 = new JLabel("Descripcion");
-		lblNewLabel_3.setBounds(59, 159, 81, 14);
+		lblNewLabel_3.setBounds(75, 158, 81, 14);
 		panel.add(lblNewLabel_3);
 
 		JLabel lblNewLabel_4 = new JLabel("Cantidad");
@@ -112,17 +121,18 @@ public class RegistarProducto extends JFrame {
 		JLabel lblNewLabel_5 = new JLabel("Precio");
 		lblNewLabel_5.setBounds(75, 227, 46, 14);
 		panel.add(lblNewLabel_5);
-		
+
 		JButton btnNewButtonAtras = new JButton("Volver al menu");
+		btnNewButtonAtras.setBackground(SystemColor.textHighlight);
 		btnNewButtonAtras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controlador.mostrarVentanaConsultaProducto();
-			    dispose();
+				dispose();
 			}
 		});
 		btnNewButtonAtras.setBounds(273, 274, 116, 23);
 		panel.add(btnNewButtonAtras);
-		
+
 	}
 
 	public void setControlador(Controlador controlador) {

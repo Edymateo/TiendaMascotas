@@ -11,6 +11,7 @@ import java.util.List;
 
 import com.inventario.project.controlador.Controlador;
 import com.inventario.project.controlador.modelo.Producto;
+import com.inventario.project.vistas.RegistrarSalida;
 
 public class PersistenciaInventario {
 
@@ -103,17 +104,77 @@ public class PersistenciaInventario {
 
 			}
 		}
-		// Agregar el nuevo producto a la lista
+
 		productos.add(nuevoProducto);       
-		// Guardar la lista completa actualizada
 		return guardarTodosLosProductos(productos);
 
 	}
 
+	public Producto buscarProducto(int idTexto) {
+		Producto producto = new Producto();
+		List<Producto> productos = leerProductos();
+		for (Producto p : productos) {
+			if (p.getId() == idTexto) {
+				producto.setId(p.getId());
+				producto.setNombre(p.getNombre());
+				producto.setDescripcion(p.getDescripcion());
+				producto.setCantidad(p.getCantidad());
+				producto.setPrecio(p.getPrecio());
 
+			}
 
+		}	return producto;
+	}
 
+	public boolean modificarProducto(Producto producto) {
+		Producto producto2 = new Producto();
+		List<Producto> productosList = leerProductos();
+		List<Producto> productosListNew = new ArrayList<>();
+		for (Producto p : productosList) {
+			if (p.getId() == producto.getId()) {
+				producto2.setId(p.getId());
+				producto2.setNombre(producto.getNombre());
+				producto2.setDescripcion(producto.getDescripcion());
+				producto2.setCantidad(producto.getCantidad());
+				producto2.setPrecio(producto.getPrecio());
+				productosListNew.add(producto2);
+			}
 
+		}
+		for (Producto p : productosList) {
+			if (!(p.getId() == productosListNew.get(0).getId())) {
+				productosListNew.add(p);
+			}
+		}
+		guardarTodosLosProductos(productosListNew);
+		return true;
+	}
+	
+	public boolean registrarSalida (Producto productoActualizado) {
+	    List<Producto> productos = leerProductos(); 
+	    boolean encontrado = false;
+
+	    for (Producto p : productos) {
+	        if (p.getId() == productoActualizado.getId()) {      
+	            int nuevaCantidad = p.getCantidad() - productoActualizado.getCantidad();
+
+	            if (nuevaCantidad < 0) {
+	                return false;
+	            }
+
+	            p.setCantidad(nuevaCantidad);
+	            encontrado = true;
+	            break;
+	        }
+	    }
+
+	    if (encontrado) {
+	        guardarTodosLosProductos(productos);
+	        return true;
+	    } else {
+	        return false;
+	    }
+	}
 
 
 

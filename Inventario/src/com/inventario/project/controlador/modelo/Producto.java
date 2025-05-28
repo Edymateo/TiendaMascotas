@@ -17,6 +17,19 @@ public class Producto {
 
 
 
+	public Producto(int int1) {
+		// TODO Auto-generated constructor stub
+	}
+
+
+
+	public Producto() {
+		// TODO Auto-generated constructor stub
+	}
+
+
+
+
 	//getters and setters
     public int getId() {
         return this.id;
